@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="  
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+            http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
+            
+	<!-- 引入属性文件 -->
+	<context:property-placeholder location="classpath:jdbc_config/config.properties" />
+
+	<!--数据库连接 -->
+	<bean id="busServerDataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="driverClassName" value="${busServerJdbc.driver}" />
+		<property name="url" value="${busServerJdbc.url}" />
+		<property name="username" value="${busServerJdbc.username}" />
+		<property name="password" value="${busServerJdbc.password}" />
+		<property name="initialSize" value="${busServerJdbc.initialSize}"></property>
+		<property name="maxActive" value="${busServerJdbc.maxActive}"></property>
+		<property name="minIdle" value="${busServerJdbc.minIdle}"></property>
+		<property name="maxWait" value="${busServerJdbc.maxWait}"></property>
+		<property name="validationQuery" value="${busServerJdbc.validationQuery}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${busServerJdbc.timeBetweenEvictionRunsMillis}"></property>
+		<property name="minEvictableIdleTimeMillis" value="${busServerJdbc.minEvictableIdleTimeMillis}"></property>
+	</bean>
+	
+	<bean id="equWatchDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${equWatchJdbc.driverClassName}" />
+		<property name="url" value="${equWatchJdbc.url}" />
+		<property name="username" value="${equWatchJdbc.username}" />
+		<property name="password" value="${equWatchJdbc.password}" />
+		<property name="initialSize" value="${equWatchJdbc.initialSize}" />
+		<property name="maxActive" value="${equWatchJdbc.maxActive}" />
+		<property name="maxIdle" value="${equWatchJdbc.maxIdle}" />
+		<property name="minIdle" value="${equWatchJdbc.minIdle}" />
+		<property name="timeBetweenEvictionRunsMillis"
+			value="${equWatchJdbc.timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis"
+			value="${equWatchJdbc.minEvictableIdleTimeMillis}" />
+		<property name="testOnBorrow" value="${equWatchJdbc.testOnBorrow}" />
+		<property name="validationQuery" value="${equWatchJdbc.validationQuery}" />
+		<property name="removeAbandoned" value="${equWatchJdbc.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${equWatchJdbc.removeAbandonedTimeout}" />
+		<property name="maxWait" value="${equWatchJdbc.maxWait}" />
+		<property name="numTestsPerEvictionRun" value="${equWatchJdbc.numTestsPerEvictionRun}" />
+		<property name="testWhileIdle" value="${equWatchJdbc.testWhileIdle}" />
+	</bean>
+	
+	<!-- 配置动态数据源 -->
+	<bean id="dynamicDataSource" class="com.bsit.common.datasource.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry value-ref="equWatchDataSource" key="equWatchDataSource"></entry>
+				<entry value-ref="busServerDataSource" key="busServerDataSource"></entry>
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="busServerDataSource"></property>
+	</bean>
+
+	<bean id="mysqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dynamicDataSource" />
+		<property name="configLocation" value="classpath:spring-mybatis.xml" />
+		<property name="mapperLocations" value="classpath:mappers/*.xml" />
+	</bean>
+	
+	<!-- 配置事务管理器，注意这里的dataSource和SqlSessionFactoryBean的dataSource要一致，不然事务就没有作用了 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dynamicDataSource" />
+	</bean>
+
+	<!-- mapper接口所在包名，Spring会自动查找其下的类 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.bsit.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="mysqlSessionFactory" />
+	</bean> 
+
+</beans>
