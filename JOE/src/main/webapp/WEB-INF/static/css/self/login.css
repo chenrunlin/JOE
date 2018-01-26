@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.layui-layout-body{
+    background: url(../../../static/img/self/bg_1.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+}

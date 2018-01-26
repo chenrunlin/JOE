@@ -1,0 +1,333 @@
+/*
+ * =========================================================================
+ * CSS 自定义全局样式 	Override Vision          Author:JoeJackson / 乔子健
+ * Email:289395845@qq.com  weixin:JOE_QZJ                Date : 2017-12-05
+ * =========================================================================
+ */
+@charset "UTF-8";
+
+/* 全局 */
+html, body {
+    -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
+    height: 100%;margin: 0;
+}
+body{background-color: #F2F2F2;}
+a{ text-decoration: none !important;background-color: transparent; }
+a:hover { outline: 0;}
+textarea {overflow: hidden;resize: none;}
+button {overflow: visible;}
+button,select {text-transform: none;}
+button,input,select,textarea {text-transform: none;font: inherit;color: inherit;  }
+
+/* about color */
+.color-default{color: #009688 !important;}
+.bg-default{background-color: #00F7DE;color: #2E2D3C;}
+.color-grey{color: #EEEEEE !important;}
+.bg-grey{background-color: #EEEEEE;color: #2E2D3C;}
+.color-white{color: #ffffff !important;}
+.bg-white{background-color: #ffffff;color: #2E2D3C;}
+.color-red{color: #FF5722 !important;}
+
+/* about margin */
+.margin-auto{margin: auto !important;}
+.margin-0{margin: 0 !important;}
+.margin-5{margin: 5px !important;}
+.margin-10{margin: 10px !important;}
+.margin-15{margin: 15px !important;}
+.margin-20{margin: 20px !important;}
+.margin-r-0{margin-right: 0 !important;}
+.margin-r-5{margin-right: 5px !important;}
+.margin-r-10{margin-right: 10px !important;}
+.margin-r-15{margin-right: 15px !important;}
+.margin-r-20{margin-right: 20px !important;}
+.margin-l-0{margin-left: 0 !important;}
+.margin-l-5{margin-left: 5px !important;}
+.margin-l-10{margin-left: 10px !important;}
+.margin-l-15{margin-left: 15px !important;}
+.margin-l-20{margin-left: 20px !important;}
+.margin-t-0{margin-top: 0 !important;}
+.margin-t-5{margin-top: 5px !important;}
+.margin-t-10{margin-top: 10px !important;}
+.margin-t-15{margin-top: 15px !important;}
+.margin-t-20{margin-top: 20px !important;}
+.margin-b-0{margin-top: 0 !important;}
+.margin-b-5{margin-bottom: 5px !important;}
+.margin-b-10{margin-bottom: 10px !important;}
+.margin-b-15{margin-bottom: 15px !important;}
+.margin-b-f15{margin-bottom: -15px !important;}
+.margin-b-20{margin-bottom: 20px !important;}
+.margin-t-150{margin-top: 150px !important;}
+
+/* about padding */
+.padded-0{padding: 0 !important;}
+.padded-5{padding: 5px !important;}
+.padded-10{padding: 10px !important;}
+.padded-15{padding: 15px !important;}
+.padded-20{padding: 20px !important;}
+.padded-t-0{padding-top: 0 !important;}
+.padded-t-5{padding-top: 5px !important;}
+.padded-t-10{padding-top: 10px !important;}
+.padded-t-15{padding-top: 15px !important;}
+.padded-t-20{padding-top: 20px !important;}
+.padded-b-0{padding-bottom: 0 !important;}
+.padded-b-5{padding-bottom: 5px !important;}
+.padded-b-10{padding-bottom: 10px !important;}
+.padded-b-15{padding-bottom: 15px !important;}
+.padded-b-20{padding-bottom: 20px !important;}
+.padded-l-0{padding-left: 0 !important;}
+.padded-l-5{padding-left: 5px !important;}
+.padded-l-10{padding-left: 10px !important;}
+.padded-l-15{padding-left: 15px !important;}
+.padded-l-20{padding-left: 20px !important;}
+.padded-r-0{padding-right: 0 !important;}
+.padded-r-5{padding-right: 5px !important;}
+.padded-r-10{padding-right: 10px !important;}
+.padded-r-15{padding-right: 15px !important;}
+.padded-r-20{padding-right: 20px !important;}
+
+/* about font */
+.font-size-30{font-size: 30px !important;}
+.font-size-25{font-size: 25px !important;}
+.font-size-20{font-size: 20px !important;}
+.font-size-18{font-size: 18px !important;}
+.font-size-16{font-size: 16px !important;}
+.font-size-14{font-size: 14px !important;}
+.font-size-12{font-size: 12px !important;}
+.font-size-10{font-size: 10px !important;}
+.font-size-8{font-size: 8px !important;}
+.text-left{text-align: left !important;}
+.text-center{text-align: center !important;}
+.text-justify{text-align: justify !important;}
+.text-right{text-align: right !important;}
+.ellipsis-1{overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.ellipsis-2{display: -webkit-box;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;white-space: normal !important;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
+.ellipsis-3{display: -webkit-box;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;white-space: normal !important;-webkit-line-clamp: 3;-webkit-box-orient: vertical;}
+.ellipsis-4{display: -webkit-box;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;white-space: normal !important;-webkit-line-clamp: 4;-webkit-box-orient: vertical;}
+
+.w-100{width: 100%;}
+.max-w-100{max-width: 100%;}
+.border-none{border: none;}
+
+/* 水平线 */
+.hr{width: 100%;position: relative;height: 1px;}
+.hr:after{height: 1px;background-color: #dddddd;display: block;content: '';position: absolute;top: auto;right: auto;bottom: 0;left: 0;width: 100%;-webkit-transform-origin: 50% 100%;transform-origin: 50% 100%;pointer-events: none;}
+
+/* 布局 */
+.overflow-auto{overflow: auto;}
+.overflow-scroll{overflow: scroll;}
+.overflow-y-auto{overflow-y: auto;}
+.overflow-x-auto{overflow-y: auto;}
+.pull-left{float: left;}
+.pull-right{float: right;}
+@media (max-width: 1100px) {
+    .pull-right{float: none !important;}
+}
+.float-none{float: none !important;}
+.hide{display: none !important;}
+.show{display: block !important;}
+.invisible{visibility: hidden;}
+.inline-block{display: inline-block;vertical-align: middle;}
+.inline{display: inline;}
+.clearfix{clear: both;}
+.clearfix:before{display: table;content: " ";}
+.clearfix:after{clear: both;}
+.mask{position: fixed;width: 100%;height: 100%;top: 0;left: 0;background: rgba(0, 0, 0, 0.3);opacity: 0;z-index: 8;visibility: hidden;-webkit-transition-duration: 300ms;transition-duration: 300ms;}
+.mask.mask-in{visibility: visible;opacity: 1;}
+.mask.mask-out{opacity: 0;}
+
+/* 清除input输入按钮 */
+.ipt_clr_btn{
+    display: none;
+    width: 12px;
+    height: 12px;
+    background-color: #000;
+    background: url("../../common/img/icon/close_icon_btn.png") no-repeat;
+    background-size: 100%;
+    position: absolute;
+    z-index: 1000000;
+    right: 10px;
+    top: 16px;
+    cursor: pointer;
+}
+
+
+/* 关于图片 */
+img.img-round{border-radius: 50%;}
+.img-box{overflow: hidden;}
+
+
+.layui-form .layui-form-item label.layui-form-label{
+    width: auto;
+    font-family: "Microsoft YaHei";
+}
+.larry-personal{
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 3px;
+    padding-bottom: 0px;
+    border: none;
+}
+header.larry-personal-tit{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #EEEFF1;
+    padding:0 20px;
+    padding-left: 30px;
+}
+header.larry-personal-tit span{
+    line-height: 50px;
+    font-size: 14px;
+    color: #858585;
+    font-weight: 300;
+}
+.larry-personal-body{
+    padding: 20px;
+}
+.layui-form{
+    padding: 0px;
+}
+/* 部分覆盖框架的公共样式 */
+table{width: 100% !important;}
+table tbody{width: 100% !important;}
+table thead tr th{font-weight: 600 !important;}
+.layui-table thead{
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 2px solid #CCCCCC;
+}
+.layui-table thead tr{
+    background-color: #ffffff !important;
+}
+.layui-table-page {
+    position: relative;
+    width: 100%;
+    padding: 7px 7px 0;
+    border-width: 1px 0 0;
+    height: 41px;
+    background-color: #ffffff !important;
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 2px solid #CCCCCC;
+    font-size: 12px;
+}
+.layui-table-view {
+    margin: 15px !important;
+}
+.layui-elem-quote2 {
+    padding: 10px;
+    line-height: 22px;
+    border-left: 5px solid #009688;
+    border-radius: 0 0 0 0;
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: -16px !important;
+}
+.layui-btn .layui-icon {
+    margin-right: 0 !important;
+}
+.layui-btn-outline {
+    border: 1px solid #009688;
+    background-color: #fff;
+    color: #009688;
+}
+.layui-btn:hover {
+    opacity: .8;
+    filter: alpha(opacity=80);
+    color: #ffffff;
+    background-color: #0d957a;
+}
+
+/*.layui-elem-quote2 .layui-inline .layui-input{line-height: 30px !important;}*/
+
+/* 搜索框 */
+.layui-form.component{
+    display: inline-block !important;
+}
+.component .layui-input {
+    height: 30px;
+    padding-left: 12px;
+    background-color: #424652;
+    background-color: rgba(255,255,255,.05);
+    border: 1px solid #CCCCCC;
+    color: #555555;
+    font-size: 13px;
+}
+.layui-form-select .layui-input {
+    padding-right: 30px;
+    cursor: inherit;
+}
+
+.line-hr-10{
+    width: 100%;
+    height: 10px;
+    background-color: #f2f2f2;
+}
+
+/* 自定义layer confirm */
+.confirm-skin .layui-layer-btn .layui-layer-btn0 {
+    border-color: #ff6600 !important;
+    background-color: #ff6600 !important;
+    color: #fff;
+}
+.confirm-skin .layui-layer-btn .layui-layer-btn1 {
+    background-color: #ffffff !important;
+}
+.confirm-skin .layui-layer-dialog .layui-layer-content{
+    text-align: center !important;
+    letter-spacing: 2px !important;
+    position: relative;
+    padding: 20px;
+    line-height: 12rem !important;
+    word-break: break-all;
+    font-size: 28px !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.confirm-skin .layui-layer-dialog .layui-layer-content .layui-layer-ico {
+    position: absolute;
+    top: 3rem !important;
+    left: 6.0rem !important;
+    width: 100px !important;
+    height: 100px !important;
+}
+.confirm-skin .layui-layer-dialog .layui-layer-padding {
+    padding: 20px 20px 20px 55px;
+    letter-spacing: 2px;
+    line-height: 6rem !important;
+    font-size: 24px !important;
+    color: #666666 !important;
+    text-align: center !important;
+}
+.confirm-skin .layui-layer-ico {
+    background: url(../img/icon/delete_icon.png) no-repeat !important;
+    background-size: 100% !important;
+}
+.confirm-skin .layui-layer-setwin .layui-layer-close1 {
+    background-position: 1px -40px;
+    cursor: pointer;
+    background: url(../img/icon/close_icon_btn.png) no-repeat !important;
+    background-size: 100% !important;
+}
+
+/* 成功提示 */
+.success-skin .layui-layer-ico {
+    background: url(../img/icon/success-icon.png) no-repeat !important;
+    background-size: 100% !important;
+}
+.success-skin .layui-layer-setwin .layui-layer-close1 {
+    background-position: 1px -40px;
+    cursor: pointer;
+    background: url(../img/icon/close_icon_btn.png) no-repeat !important;
+    background-size: 100% !important;
+}
+
+/* 失败提示 */
+.fail-skin .layui-layer-ico {
+    background: url(../img/icon/fail-icon.png) no-repeat !important;
+    background-size: 100% !important;
+}
+.fail-skin .layui-layer-setwin .layui-layer-close1 {
+    background-position: 1px -40px;
+    cursor: pointer;
+    background: url(../img/icon/close_icon_btn.png) no-repeat !important;
+    background-size: 100% !important;
+}
+

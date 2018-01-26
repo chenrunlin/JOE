@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+/* layui overlay css */
+.layui-nav-child dd a{
+    font-size: 13px;
+}
+.layui-nav-child dd.layui-this a{
+    font-size: 14px;
+}
+.nav-item-icon{
+    font-size: 18px;margin-right: 5px;color: #009688;
+}
+.layui-this .nav-item-icon{
+    background-color: #009688;
+    color: #ffffff !important;
+}
+
+html,body{
+    height: 100%;
+    background: #F1F2F7;
+    font-size: 14px;
+    padding-right: 3px;
+}
+.larry-grid{
+    display:block;
+    width: calc(100% - 20px);
+    width: -moz-calc(100% - 20px);
+    width: -webkit-calc(100% - 20px);
+    height: auto;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 10px;
+    background: #F1F2F7;
+    border-radius: 5px;
+}

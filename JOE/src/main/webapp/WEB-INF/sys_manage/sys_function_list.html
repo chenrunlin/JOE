@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>功能列表</title>
+    <!-- style ================================================ -->
+    <link rel="stylesheet" href="./../common/bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="./../common/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="./../common/css/common-joe.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <link rel="stylesheet" href="./../common/jsplugin/layui2.2.45/css/layui.css" media="all">
+    <link rel="stylesheet" href="./../common/css/common-joe.css?v=20171219" media="all">
+    <style>
+        .layui-table-page select {
+             height: auto !important;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+<div class="larry-grid larry-wrapper ">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <div style="border: 1px solid #ddd;" class="padded-15 margin-15">
+                <ul id="demo1"></ul>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <a href="sys_function_add.html">
+                <button class="layui-btn layui-btn-sm margin-l-15 margin-t-15">添加新功能</button>
+            </a>
+            <table class="layui-hide" id="test" lay-filter="Table"></table>
+        </div>
+    </div>
+</div>
+
+<!-- template 操作 -->
+<script type="text/html" id="operations">
+    <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="layui-icon"></i></a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon"></i></a>
+</script>
+
+<script type="text/javascript" src="./../common/layui/layui.js"></script>
+<script src="./../common/js/jquery-1.12.4.min.js"></script>
+<script src="./../common/jsplugin/layui2.2.45/layui.js"></script>
+<script src="./../common/js/common-joe.js"></script>
+<script>
+    layui.config({
+        version: timeStamp //为了更新 js 缓存
+        ,skin: ['confirm-skin','success-skin']//自定义样式
+    });
+
+    layui.use(['jquery','laypage', 'layer', 'table', 'element', 'form' ,'laytpl'], function(){
+        var $ = layui.jquery,
+            laydate = layui.laydate, //日期
+            laypage = layui.laypage, //分页
+            layer = layui.layer, //弹层
+            table = layui.table, //表格
+            element = layui.element, //元素操作
+            form = layui.form,
+            laytpl = layui.laytpl;
+
+        //执行一个 table 实例
+        var commonUrl = "../datas/";
+        table.render({
+            elem: '#test'
+            ,id: 'idTest'
+            ,height:  'full-85'
+            ,width: '100%'
+            ,url: commonUrl+'machine_list.json?page=1&limit=10'
+            //,where: {token: 'sasasas', id: 123} //如果无需传递额外参数，可不加该参数
+            ,method:'post'
+            ,limit: 10 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+            ,limits: [10,20,30,50,100]
+            ,cellMinWidth: 100
+            ,page: true //开启分页
+            ,loading:true //加载动画
+            ,skin: 'line' //行边框风格
+            ,cols: [[ //表头
+                {field: 'id', title: 'ID', width:80, sort: true}
+                ,{field: 'username', title: '用户名', width:80,event: 'setSign', style:'cursor: pointer;'}
+                ,{field: 'sex', title: '性别', width:80, sort: true}
+                ,{field: 'city', title: '城市', width:80}
+                ,{field: 'sign', title: '签名', width: 170}
+                ,{field: 'experience', title: '积分', width: 80, sort: true}
+                ,{field: 'score', title: '评分', width: 80, sort: true}
+                ,{field: 'classify', title: '职业', width: 80}
+                ,{field: 'wealth', title: '财富', width: 135, sort: true}
+                ,{fixed: 'right', title: '操作', width: 265, align:'center', toolbar: '#operations'}
+            ]]
+            ,done: function(res, curr, count){
+                //如果是异步请求数据方式，res即为你接口返回的信息。
+                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                console.log(res);
+
+                //得到当前页码
+                console.log(curr);
+
+                //得到数据总量
+                console.log(count);
+            }
+        });
+
+        //分页
+        laypage.render({
+            elem: '#test' //分页容器的id
+            ,count: 100      //总页数
+            ,skip: true    //开启跳页
+            ,jump: function(obj, first){
+                if(!first){
+                    layer.msg('第'+ obj.curr +'页');
+                }
+            }
+        });
+
+        //监听工具条
+        table.on('tool(Table)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                ,layEvent = obj.event; //获得 lay-event 对应的值
+
+            //编辑功能
+            if(obj.event === 'setSign'){
+                layer.prompt({
+                    formType: 2
+                    ,title: '修改设备 ['+ data.username +'] 的名称为：'
+                    ,value: data.sign
+                }, function(value, index){
+                    layer.close(index);
+                    //这里一般是发送修改的Ajax请求
+
+                    //同步更新表格和缓存对应的值
+                    obj.update({
+                        sign: value
+                    });
+                });
+            }
+
+            //操作功能
+            if(layEvent === 'detail'){
+                layer.msg('查看操作');
+            } else if(layEvent === 'edit'){
+                layer.msg('提交成功！', {
+                    extend: '../../common/css/common-joe.css', //加载您的扩展样式
+                    skin:'success-skin',
+                    icon: 2,
+                    title:'提示',
+                    btnAlign: 'c',
+                    area: ['26rem', '15rem'],
+                    time: 2000,
+                    shadeClose: true,
+                    shade: 0.5,
+                    anim: 2
+                });
+            }else if(layEvent === 'del'){
+                layer.confirm('确定删除吗？',{
+                    extend: '../../common/css/common-joe.css', //加载您的扩展样式
+                    skin:'confirm-skin',
+                    icon: 2,
+                    title:'提示',
+                    btnAlign: 'c',
+                    area: ['26rem', '15rem'],
+                    btn: ['删除', '取消'],
+                    shadeClose: true,
+                    shade: 0.5,
+                    anim: 4
+                }, function(index){
+                    obj.del(); //删除对应行（tr）的DOM结构
+                    layer.close(index);
+                    //向服务端发送删除指令
+
+                    //删除后重新加载表格
+                    table.reload('idTest',{
+                        where: {
+                            field: "id" //排序字段，对应 cols 设定的各字段名
+                            ,order: "asc" //排序方式  asc: 升序、desc: 降序、null: 默认排序
+                        },
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                    });
+                });
+            }
+        });
+
+        //获取表格数据
+        var active_2 = {
+            getCheckData: function(){ //获取选中数据
+                var checkStatus = table.checkStatus('idTest')
+                    ,data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
+            }
+            ,getCheckLength: function(){ //获取选中数目
+                var checkStatus = table.checkStatus('idTest')
+                    ,data = checkStatus.data;
+                layer.msg('选中了：'+ data.length + ' 个');
+            }
+            ,isAll: function(){ //验证是否全选
+                var checkStatus = table.checkStatus('idTest');
+                layer.msg(checkStatus.isAll ? '全选': '未全选')
+            }
+        };
+        $('.get-table-data .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active_2[type] ? active_2[type].call(this) : '';
+        });
+
+        //监听是否开启开关
+        form.on('switch(switchTest)', function(data){
+            layer.tips('温馨提示：您'+ (this.checked ? '已启用' : '已关闭') + '该设备！', data.othis)
+        });
+
+        //按ID搜索
+        var active = {
+            reload: function(){
+                var demoReload = $('#demoReload');
+
+                //执行重载
+                table.reload('idTest', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                        key: {
+                            id: demoReload.val()
+                        }
+                    }
+                });
+            }
+        };
+        $('#reloadBtn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        //获取选中行
+        var checkStatus = table.checkStatus('idTest'); //idTest即为基础参数id对应的值
+        var list = "";
+        console.log('当前选中 '+checkStatus.data.length+' 行');
+        for(var i=0;i<checkStatus.data.length;i++){
+            list+=' '+checkStatus.data[i].RowNumber;
+        }
+        console.log('选中：'+list);
+        console.log(checkStatus.data); //获取选中行的数据
+        console.log(checkStatus.data.length); //获取选中行数量，可作为是否有选中行的条件
+        console.log(checkStatus.isAll ); //表格是否全选
+
+        //监听复选框选择
+        table.on('checkbox(Table)', function(obj){ //Table是table原始容器的属性 lay-filter="对应的值"
+            console.log(obj.checked); //当前是否选中状态
+            console.log(obj.data); //选中行的相关数据
+            console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+        });
+
+        //监听单元格编辑
+        table.on('edit(Table)', function(obj){
+            console.log(obj.value); //得到修改后的值
+            console.log(obj.field); //当前编辑的字段名
+            console.log(obj.data); //所在行的所有相关数据
+        });
+
+        //监听排序切换
+        table.on('sort(Table)', function(obj){
+            console.log(obj.field); //当前排序的字段名
+            console.log(obj.type); //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
+            console.log(this); //当前排序的 th 对象
+            //尽管我们的 table 自带排序功能，但并没有请求服务端。
+            //有些时候，你可能需要根据当前排序的字段，重新向服务端发送请求，从而实现服务端排序，如：
+            table.reload('idTest', {
+                initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。 layui 2.1.1 新增参数
+                ,where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
+                    field: obj.field //排序字段
+                    ,order: obj.type //排序方式
+                }
+            });
+        });
+
+    });
+
+    //Demo
+    layui.use(['tree', 'layer'], function(){
+        var layer = layui.layer
+            ,$ = layui.jquery;
+
+        layui.tree({
+            elem: '#demo1' //指定元素
+            ,target: '_blank' //是否新选项卡打开（比如节点返回href才有效）
+            ,click: function(item){ //点击节点回调
+                layer.msg('当前节名称：'+ item.name + '<br>全部参数：'+ JSON.stringify(item));
+                console.log(item);
+            }
+            ,nodes: [ //节点
+                {
+                    name: '系统管理'
+                    ,id: 1
+                    ,alias: 'changyong'
+                    ,children: [
+                    {
+                        name: '所有未读（设置跳转）'
+                        ,id: 11
+                        ,href: 'http://www.layui.com/'
+                        ,alias: 'weidu'
+                    }, {
+                        name: '置顶邮件'
+                        ,id: 12
+                    }, {
+                        name: '标签邮件'
+                        ,id: 13
+                    }
+                ]
+                }, {
+                    name: '消息管理'
+                    ,id: 2
+                    ,spread: false //是否展开
+                    ,children: [
+                        {
+                            name: '设置跳转'
+                            ,id: 11
+                            ,href: 'http://www.layui.com/'
+                            ,alias: 'weidu'
+                        }, {
+                            name: '置顶邮件'
+                            ,id: 12
+                        }, {
+                            name: '标签邮件'
+                            ,id: 13
+                        }
+                    ]
+                }
+                ,{
+                    name: '内容管理'
+                    ,id: 3
+                    ,alias: 'changyong'
+                    ,children: [
+                        {
+                            name: '爱情动作片'
+                            ,id: 31
+                            ,alias: 'love'
+                        },
+                        {
+                            name: '前端'
+                            ,id: 121
+
+                        }
+                    ]
+                }
+            ]
+        });
+
+    });
+</script>
+
+</body>
+</html>

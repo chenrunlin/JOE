@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+/* kit overlay css */
+.kit-tab .kit-tab-tool {
+    right: 0;
+}
+.kit-tab .kit-tab-tool-body {
+    right: 0;
+}
+.kit-tab .layui-tab-title {
+    width: calc(100% - 62px);
+    padding-right: 0;
+    position: absolute;
+    z-index: 2;
+}
+
+
+/* layui overlay css */
+.layui-nav-child dd a{
+    font-size: 13px;
+}
+.layui-nav-child dd.layui-this a{
+    font-size: 14px;
+}
+.nav-item-icon{
+    font-size: 18px;margin-right: 5px;color: #009688;
+}
+.layui-this .nav-item-icon{
+    background-color: #009688;
+    color: #ffffff !important;
+}
+.layui-nav .layui-nav-item {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 52px;
+}
+.layui-nav-child {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 55px;
+}
+.layui-nav .layui-badge {
+    position: relative;
+    top: 50%;
+    margin:-1px 5px;
+}

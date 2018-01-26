@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="static/img/icon/shortcut_icon.png">
+    <title>CMS-JOE</title>
+    <!-- style ================================================ -->
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="./plugins/font-awesome/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" href="./build/css/app.css" media="all" />
+    <link rel="stylesheet" href="./build/css/themes/default.css" media="all" id="skin" kit-skin />
+    <link rel="stylesheet" href="./static/css/common-self.css">
+    <link rel="stylesheet" href="./static/css/layui-overlay.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="kit-theme">
+<div class="layui-layout layui-layout-admin kit-layout-admin">
+
+    <!-- 头部区域 -->
+    <div class="layui-header">
+        <div class="layui-logo">JOE JACKSON</div>
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="#">最新活动</a></li>
+            <li class="layui-nav-item"><a href="#">产品</a></li>
+            <li class="layui-nav-item"><a href="#">大数据</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">解决方案</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="#">邮件管理</a></dd>
+                    <dd><a href="#">消息管理</a></dd>
+                    <dd><a href="#">授权管理</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="#">社区</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" id="pay"><i class="fa fa-gratipay" aria-hidden="true"></i> 捐赠我</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right padded-r-15">
+            <li class="layui-nav-item">
+                <a href="">消息<span class="layui-badge">13</span></a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="#">个人中心</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="#"><img src="static/img/icon/logo-icon.png" class="layui-nav-img">我</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">修改信息</a></dd>
+                    <dd><a href="javascript:;">安全设置</a></dd>
+                    <dd><a href="login.html">退出登录</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 左侧导航区域 -->
+    <div class="layui-side layui-bg-black kit-side">
+        <div class="layui-side-scroll">
+            <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
+            <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;"><i class="layui-icon" aria-hidden="false">&#xe614;</i><span> 系统管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;" data-url="sys_manage/sys_function_list.html" data-icon="" data-title="功能管理" kit-target data-id='2'><span class="padded-l-10">功能管理</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="sys_manage/sys_role_list.html" data-icon="" data-title="角色管理" kit-target data-id='3'><span class="padded-l-10">角色管理</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="sys_manage/sys_user_list.html" data-icon="" data-title="用户管理" kit-target data-id='4'><span class="padded-l-10">用户管理</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="sys_manage/dictionary.html" data-icon="" data-title="字典管理" kit-target data-id='5'><span class="padded-l-10">字典管理</span></a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe611;</i><span> 消息管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" kit-target data-options="{url:'404.html',icon:'',title:'消息类型',id:'6'}"><span class="padded-l-10">消息类型</span></a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'404.html',icon:'',title:'消息发布',id:'7'}"><span class="padded-l-10">消息发布</span></a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'404.html',icon:'',title:'意见反馈',id:'8'}"><span class="padded-l-10">意见反馈</span></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe632;</i><span> 内容管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" kit-target data-options="{url:'navbar.html',icon:'',title:'Banner管理',id:'9'}"><span class="padded-l-10">Banner管理</span></a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'tab.html',icon:'',title:'广告位管理',id:'10'}"><span class="padded-l-10">广告位管理</span></a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'onelevel.html',icon:'',title:'产品列表管理',id:'11'}"><span class="padded-l-10">产品列表管理</span></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe857;</i><span> 企业管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" kit-target data-options="{url:'null.html',icon:'',title:'企业信息',id:'12'}"><span class="padded-l-10">企业信息</span></a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'null.html',icon:'',title:'修改密码',id:'13'}"><span class="padded-l-10">修改密码</span></a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'null.html',icon:'',title:'部门管理',id:'14'}"><span class="padded-l-10">部门管理</span></a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'null.html',icon:'',title:'职位管理',id:'15'}"><span class="padded-l-10">职位管理</span></a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'null.html',icon:'',title:'员工管理',id:'16'}"><span class="padded-l-10">员工管理</span></a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'null.html',icon:'',title:'员工信息',id:'17'}"><span class="padded-l-10">员工信息</span></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe60e;</i><span> 系统日志</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" kit-target data-options="{url:'null.html',icon:'',title:'操作日志',id:'18'}"><span class="padded-l-10">操作日志</span></a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'null.html',icon:'',title:'登录日志',id:'19'}"><span class="padded-l-10">登录日志</span></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe60f;</i><span> 其他</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" kit-target data-options="{url:'null.html',icon:'',title:'公司制度',id:'20'}"><span class="padded-l-10">公司制度</span></a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'null.html',icon:'',title:'使用指南',id:'21'}"><span class="padded-l-10">使用指南</span></a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body" id="container">
+        <div style="padding: 15px;"><i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop">&#xe63e;</i> 请稍等...</div>
+    </div>
+
+    <!-- 底部固定区域 -->
+    <div class="layui-footer">
+        <div class="pull-right">
+            2018 &copy; <a href="http://www.zijian.com">www.zijian.com</a> - 天行健
+        </div>
+    </div>
+
+</div>
+
+<!-- JavaScript ========================================== -->
+<script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1264021086'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1264021086%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script src="plugins/layui/layui.js"></script>
+<script>
+    var message;
+    layui.config({
+        base: 'build/js/',
+        version: '1.0.1'
+    }).use(['app', 'message'], function() {
+        var app = layui.app,
+            $ = layui.jquery,
+            layer = layui.layer;
+        //将message设置为全局以便子页面调用
+        message = layui.message;
+        //主入口
+        app.set({
+            type: 'iframe'
+        }).init();
+        $('#pay').on('click', function() {
+            layer.open({
+                title: false,
+                type: 1,
+                content: '<img src="./src/images/pay.png" />',
+                area: ['500px', '250px'],
+                shadeClose: true
+            });
+        });
+        $('dl.skin > dd').on('click', function() {
+            var $that = $(this);
+            var skin = $that.children('a').data('skin');
+            switchSkin(skin);
+        });
+        var setSkin = function(value) {
+            layui.data('kit_skin', {
+                key: 'skin',
+                value: value
+            });
+        },
+        getSkinName = function() {
+            return layui.data('kit_skin').skin;
+        },
+        switchSkin = function(value) {
+            var _target = $('link[kit-skin]')[0];
+            _target.href = _target.href.substring(0, _target.href.lastIndexOf('/') + 1) + value + _target.href.substring(_target.href.lastIndexOf('.'));
+            setSkin(value);
+        },
+        initSkin = function() {
+            var skin = getSkinName();
+            switchSkin(skin === undefined ? 'default' : skin);
+        }();
+    });
+</script>
+</body>
+
+</html>

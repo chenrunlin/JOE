@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="static/img/icon/shortcut_icon.png">
+    <title>登录 - JOE JACKSON</title>
+    <!-- style ================================================ -->
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css"/>
+    <link rel="stylesheet" href="./plugins/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="./build/css/login.css"/>
+    <link rel="stylesheet" href="./plugins/sideshow/css/normalize.css"/>
+    <link rel="stylesheet" href="./plugins/sideshow/css/demo.css"/>
+    <link rel="stylesheet" href="./plugins/sideshow/css/component.css"/>
+    <!--[if IE]>
+        <script src="./plugins/sideshow/js/html5.js"></script>
+    <![endif]-->
+    <script>
+        if (window != window.top) top.location.href = self.location.href;
+    </script>
+</head>
+
+<body class="kit-login-bg">
+
+    <div class="container demo-1">
+        <div class="content">
+            <div id="large-header" class="large-header">
+                <canvas id="demo-canvas"></canvas>
+                <div class="kit-login-box">
+                    <header>
+                        <h1>JOE SYSTEM</h1>
+                    </header>
+                    <div class="kit-login-main">
+                        <form action="/" class="layui-form" method="post">
+                            <div class="layui-form-item">
+                                <label class="kit-login-icon">
+                                    <i class="layui-icon">&#xe612;</i>
+                                </label>
+                                <input type="text" name="userName" lay-verify="required" autocomplete="off" placeholder="邮箱/手机号" class="layui-input">
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="kit-login-icon">
+                                    <i class="layui-icon">&#xe642;</i>
+                                </label>
+                                <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="密码" class="layui-input">
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="kit-pull-left kit-login-remember">
+                                    <input type="checkbox" name="rememberMe" value="true" lay-skin="primary" checked title="记住帐号?">
+                                </div>
+                                <div class="kit-pull-right">
+                                    <button class="layui-btn layui-btn-primary" lay-submit lay-filter="login">
+                                        <i class="fa fa-sign-in" aria-hidden="true"></i> 登录
+                                    </button>
+                                </div>
+                                <div class="kit-clear"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <footer>
+                        <p>JOE © <a href="http://zijian.cn" style="color:white; font-size:18px;" target="_blank">www.zijian.cn</a></p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript ================================= -->
+    <script src="./plugins/layui/layui.js"></script>
+    <script src="./plugins/sideshow/js/TweenLite.min.js"></script>
+    <script src="./plugins/sideshow/js/EasePack.min.js"></script>
+    <script src="./plugins/sideshow/js/rAF.js"></script>
+    <script src="./plugins/sideshow/js/demo-1.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function() {
+            var layer = layui.layer,
+                $ = layui.jquery,
+                form = layui.form;
+
+            //清理左侧菜单缓存
+            var index = layer.load(2, {
+                shade: [0.3, '#333']
+            });
+            $(window).on('load', function() {
+                layer.close(index);
+                form.on('submit(login)', function(data) {
+                    var loadIndex = layer.load(2, {
+                        shade: [0.3, '#333']
+                    });
+                    location.href = 'index.html';
+                    // $.post(data.form.action, data.field, function(res) {
+                    //     if (!res.rel) {
+                    //         layer.msg(res.msg, {
+                    //             icon: 2
+                    //         });
+                    //         loadIndex && layer.close(loadIndex);
+                    //         $('#changeCode').click(); //刷新验证码
+                    //     } else {
+                    //         setTimeout(function() {
+                    //             location.href = '/'
+                    //         }, 1500);
+                    //     }
+                    // }, 'json');
+                    return false;
+                });
+            }());
+        });
+    </script>
+</body>
+
+</html>
