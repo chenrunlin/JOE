@@ -31,7 +31,7 @@
     	<!-- 设置controller返回时的编码，防止乱码 -->
     </bean>
     
-    <mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
+    <mvc:resources mapping="/**" location="/WEB-INF/"/>
 	
 	<!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
 	<bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
