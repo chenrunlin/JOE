@@ -11,5 +11,10 @@ public class LoginController {
     public ModelAndView login(){
         return new ModelAndView("login");
     }
+	
+	@RequestMapping("/index")
+    public ModelAndView index(){
+        return new ModelAndView("index");
+    }
 
 }
